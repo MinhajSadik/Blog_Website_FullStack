@@ -1,0 +1,9 @@
+{
+  "name": "blog_website_backend",
+  "version": "1.0.0",
+  "description": "blog website for job assignment",
+  "main": "server.js",
+  "repository": "https://github.com/MinhajSadik/Blog_Website_FullStack",
+  "author": "MinhajSadik",
+  "license": "MIT"
+}
