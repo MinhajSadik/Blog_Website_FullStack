@@ -2,6 +2,41 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user-model";
 
+export const signin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const oldUser = await UserModel.findOne({ email });
+    if (!oldUser) {
+      return res.status(400).json({
+        message: "User doesn't exist",
+      });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, oldUser.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({
+        message: "Invalid credentials",
+      });
+    }
+    const token = jwt.sign(
+      { email: oldUser.email, id: oldUser._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({
+      result: oldUser,
+      token,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 export const signup = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
