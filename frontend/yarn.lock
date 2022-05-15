@@ -6130,10 +6130,10 @@ material-ui-chip-input@^1.1.0:
     classnames "^2.2.5"
     prop-types "^15.6.1"
 
-mdb-react-ui-kit@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mdb-react-ui-kit/-/mdb-react-ui-kit-3.0.0.tgz#f3831930e7d0889372bff1e00eef6883e3321c99"
-  integrity sha512-LgnmfkBqd4JKvFfnr1TjOjbqevFxgyKFlvTaVF4injeHMoY89gYUCsrpW4vdNwi3QrVHvi6ojkcy2oNOWzsOjg==
+mdb-react-ui-kit@^2.3.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/mdb-react-ui-kit/-/mdb-react-ui-kit-2.4.0.tgz#ca55c8f35e8d9d98b9fa082df038c130beceb576"
+  integrity sha512-o6fzW76WbHNpcKLD3spuKaR3yBA7UgCdNEhBCsCTz+olp+hRIPym/CPBfQc9QsLDPgqiQCfvH7c9TiKSuAUKcA==
   dependencies:
     "@popperjs/core" "2.6.0"
     clsx "1.1.1"

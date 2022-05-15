@@ -45,11 +45,11 @@ export const signup = async (req, res) => {
     if (existedUser) {
       return res.status(400).send({ message: "User already exists" });
     }
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await UserModel.create({
-      firstName,
-      lastName,
+      name: `${firstName} ${lastName}`,
       email,
       password: hashedPassword,
     });
