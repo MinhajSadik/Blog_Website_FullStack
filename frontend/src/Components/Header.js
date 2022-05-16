@@ -1,3 +1,4 @@
+import decode from "jwt-decode";
 import {
   MDBCollapse,
   MDBContainer,
@@ -11,7 +12,8 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { setLogout } from "../redux/features/authSlice";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -19,20 +21,18 @@ const Header = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //   const token = user?.token;
+  const token = user?.token;
 
-  //   if (token) {
-  //     const decodedToken = decode(token);
-  //     if (decodedToken.exp * 1000 < new Date().getTime()) {
-  //       dispatch(setLogout());
-  //     }
-  //   }
+  if (token) {
+    const decodedToken = decode(token);
+    if (decodedToken.exp * 1000 < new Date().getTime()) {
+      // dispatch(setLogout());
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (search) {
-      //   dispatch(searchTours(search));
-      navigate(`/tours/search?searchQuery=${search}`);
       setSearch("");
     } else {
       navigate("/");
@@ -40,7 +40,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // dispatch(setLogout());
+    dispatch(setLogout());
   };
 
   return (
@@ -48,7 +48,7 @@ const Header = () => {
       <MDBContainer>
         <MDBNavbarBrand
           href="/"
-          style={{ color: "#606080", fontWeight: "600", fontSize: "22px" }}
+          style={{ color: "black", fontWeight: "600", fontSize: "22px" }}
         >
           Blog Website
         </MDBNavbarBrand>
@@ -57,14 +57,14 @@ const Header = () => {
           aria-expanded="false"
           aria-label="Toogle navigation"
           onClick={() => setShow(!show)}
-          style={{ color: "#606080" }}
+          style={{ color: "black" }}
         >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
         <MDBCollapse show={show} navbar>
           <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0">
             {user?.result?._id && (
-              <h5 style={{ marginRight: "30px", marginTop: "10px" }}>
+              <h5 style={{ marginRight: "30px", marginTop: "27px" }}>
                 Logged in as: {user?.result?.name}
               </h5>
             )}
@@ -76,8 +76,8 @@ const Header = () => {
             {user?.result?._id && (
               <>
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/addTour">
-                    <p className="header-text">Add Tour</p>
+                  <MDBNavbarLink href="/addPost">
+                    <p className="header-text">Add New Post</p>
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
@@ -107,7 +107,7 @@ const Header = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Search Tour"
+              placeholder="Search Post"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
