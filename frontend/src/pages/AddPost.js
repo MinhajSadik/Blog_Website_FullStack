@@ -17,7 +17,7 @@ const initialState = {
   date: "",
 };
 
-const AddEditPost = () => {
+const AddPost = () => {
   const [postData, setPostData] = useState(initialState);
   const [errMsg, setErrMsg] = useState(null);
   const { error, loading } = useSelector((state) => ({
@@ -135,4 +135,4 @@ const AddEditPost = () => {
   );
 };
 
-export default AddEditPost;
+export default AddPost;

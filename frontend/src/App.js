@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Header from "./Components/Header";
-import AddEditPost from "./pages/AddEditPost";
+import AddPost from "./pages/AddPost";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,8 +27,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/addPost" element={<AddEditPost />} />
-          <Route path="/editPost/:id" element={<AddEditPost />} />
+          <Route path="/addPost" element={<AddPost />} />
+          {/* <Route path="/editPost/:id" element={<AddPost />} /> */}
         </Routes>
       </div>
     </BrowserRouter>
