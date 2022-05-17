@@ -20,12 +20,21 @@ export const createPost = async (req, res) => {
 
 export const getPost = async (req, res) => {
   try {
-    const posts = await PostModel.find();
+    const posts = await PostModel.find({}).populate("author", "name email");
+    // .populate("comments.replies");
+    // .populate({
+    //   path: "comments",
+    //   model: "Comment",
+    //   populate: {
+    //     path: "replies",
+    //     model: "Reply",
+    //   },
+    // });
     res.status(200).json(posts);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({
-      message: "Internal Server Error",
+      message: error.message,
     });
   }
 };

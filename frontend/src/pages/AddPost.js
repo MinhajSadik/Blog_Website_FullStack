@@ -39,13 +39,15 @@ const AddPost = () => {
 
     if (title && content && date) {
       const addPostData = { ...postData, name: user?.result?.name };
-      dispatch(
-        createPost({
-          postData,
-          navigate,
-          toast,
-        })
-      );
+      dispatch(createPost({ postData: addPostData, navigate, toast }));
+
+      // dispatch(
+      //   createPost({
+      //     postData,
+      //     navigate,
+      //     toast,
+      //   })
+      // );
     } else {
       setErrMsg("Please fill all the fields");
     }

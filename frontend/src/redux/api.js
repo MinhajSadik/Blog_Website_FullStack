@@ -15,3 +15,4 @@ export const signIn = (formData) => API.post("/users/signin", formData);
 export const signUp = (formData) => API.post("/users/signup", formData);
 
 export const createPost = (postData) => API.post("/post", postData);
+export const getPosts = () => API.get("/post");
