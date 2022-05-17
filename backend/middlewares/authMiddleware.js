@@ -1,25 +1,25 @@
 import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel";
-const auth = async (req, res, next) => {
+
+const checkAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const isCustomAuth = token.length < 500;
-    let decodedData;
-    if (token && isCustomAuth) {
-      decodedData = jwt.verify(token, process.env.JWT_SECRET);
-      req.userId = decodedData.id;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await UserModel.findById(decoded.id);
+    if (!user) {
+      res.status(401).json({
+        message: "Unauthorized",
+      });
     } else {
-      decodedData = jwt.decode(token);
-      const user = await UserModel.findOne({ _id: decodedData._id });
-      req.userId = user._id;
+      req.user = user;
+      next();
     }
-    next();
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     res.status(500).json({
       message: error.message,
     });
   }
 };
 
-export default auth;
+export default checkAuth;

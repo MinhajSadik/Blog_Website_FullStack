@@ -6,7 +6,7 @@ export const createPost = createAsyncThunk(
   async ({ postData, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.createPost(postData);
-      toast.success("Post Added Successful");
+      toast.success("Post Added Successfully");
       navigate("/");
       return response.data;
     } catch (error) {

@@ -20,6 +20,11 @@ const postSchema = mongoose.Schema(
       type: Date,
       default: new Date(),
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
   },
   { timestamp: true }
 );

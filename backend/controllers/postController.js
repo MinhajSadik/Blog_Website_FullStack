@@ -4,6 +4,7 @@ export const createPost = async (req, res) => {
   const post = req.body;
   const newPost = new PostModel({
     ...post,
+    author: req.user._id,
     createdAt: new Date().toISOString(),
   });
   try {
@@ -15,22 +16,6 @@ export const createPost = async (req, res) => {
       message: "Internal Server Error",
     });
   }
-  // const { title, content, date } = req.body;
-  // const newPost = new PostModel({
-  //   title,
-  //   content,
-  //   date,
-  //   createAt: new Date().toISOString(),
-  // });
-  // try {
-  //   await newPost.save();
-  //   res.status(201).json(newPost);
-  // } catch (error) {
-  //   console.error(error.message);
-  //   res.status(500).json({
-  //     message: error.message,
-  //   });
-  // }
 };
 
 export const getPost = async (req, res) => {
