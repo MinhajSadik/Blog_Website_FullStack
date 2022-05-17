@@ -20,17 +20,13 @@ const postSlice = createSlice({
   name: "post",
   initialState: {
     post: {},
-    posts: {},
+    posts: [],
     userPosts: [],
     error: "",
     loading: false,
   },
 
-  reducers: {
-    setPost: (state, action) => {},
-    setPosts: (state, action) => {},
-    setUserPosts: (state, action) => {},
-  },
+  reducers: {},
   extraReducers: {
     [createPost.pending]: (state, action) => {
       state.loading = true;
