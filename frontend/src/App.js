@@ -9,6 +9,7 @@ import AddPost from "./pages/AddPost";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import SinglePost from "./pages/SinglePost";
 import { setUser } from "./redux/features/authSlice";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/addPost" element={<AddPost />} />
           {/* <Route path="/editPost/:id" element={<AddPost />} /> */}
+          <Route path="/post/:id" element={<SinglePost />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -19,6 +19,7 @@ code {
 }
 
 .top-left {
+  margin-top: 100px;
   position: absolute;
   top: 8px;
   left: 16px;
@@ -27,19 +28,19 @@ code {
   font-size: 18px;
 }
 
-.tag-card {
+.card {
   margin: 10px 0 0 20px;
   color: #806a78;
 }
 
-.tourName {
+.postName {
   color: "#F48FB1";
   font-size: 18px;
   margin: 0 0 0 4px;
   font-weight: 500;
 }
 
-.tagErrMsg {
+.postErrMsg {
   color: #f93154;
   margin-top: 5px;
   text-align: left;

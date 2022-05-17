@@ -29,6 +29,18 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const getPost = createAsyncThunk(
+  "tour/getPost",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.getPost(id);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState: {
@@ -60,6 +72,17 @@ const postSlice = createSlice({
       state.posts = [action.payload];
     },
     [getPosts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [getPost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.posts = [action.payload];
+    },
+    [getPost.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

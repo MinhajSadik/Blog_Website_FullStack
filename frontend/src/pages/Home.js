@@ -1,11 +1,13 @@
-import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
+import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import PostCard from "../Components/PostCard";
 import { getPosts } from "../redux/features/postSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => ({
+  const { posts, loading, currentPage } = useSelector((state) => ({
     ...state.post,
   }));
 
@@ -13,11 +15,10 @@ const Home = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
+  const location = useLocation();
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  // const location = useLocation();
 
   return (
     <div
@@ -29,15 +30,17 @@ const Home = () => {
       }}
     >
       <MDBRow className="mt-5">
+        {posts.length === 0 && location.pathname === "/" && (
+          <MDBTypography className="text-center mb-0" tag="h2">
+            No Post Found
+          </MDBTypography>
+        )}
         <MDBCol>
           <MDBContainer>
-            <MDBRow>
-              {posts.map((post) => (
-                <div key={post.id}>
-                  <h1>{post.title}</h1>
-                  <p>{post.content}</p>
-                </div>
-              ))}
+            <MDBRow className="row-cols-1 row-cols-md-3 g-2">
+              {posts.map((post) =>
+                post.map((p) => <PostCard key={p._id} {...p} />)
+              )}
             </MDBRow>
           </MDBContainer>
         </MDBCol>
