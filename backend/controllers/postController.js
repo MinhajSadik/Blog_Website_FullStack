@@ -41,7 +41,7 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params.id;
   try {
     const post = await PostModel.findById(id);
     res.status(200).json(post);
