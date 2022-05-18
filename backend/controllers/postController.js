@@ -20,17 +20,17 @@ export const createPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await PostModel.find({});
-    // .populate("author", "name email");
-    // .populate("comments.replies");
-    // .populate({
-    //   path: "comments",
-    //   model: "Comment",
-    //   populate: {
-    //     path: "replies",
-    //     model: "Reply",
-    //   },
-    // });
+    const posts = await PostModel.find({})
+      // .populate("author", "name email");
+      // .populate("comments.replies");
+      .populate({
+        path: "comments",
+        model: "Comment",
+        populate: {
+          path: "replies",
+          model: "Reply",
+        },
+      });
     res.status(200).json(posts);
   } catch (error) {
     console.error(error.message);
@@ -41,7 +41,7 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   try {
     const post = await PostModel.findById(id);
     res.status(200).json(post);

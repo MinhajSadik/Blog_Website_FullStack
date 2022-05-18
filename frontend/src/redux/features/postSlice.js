@@ -30,7 +30,7 @@ export const getPosts = createAsyncThunk(
 );
 
 export const getPost = createAsyncThunk(
-  "tour/getPost",
+  "post/getPost",
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.getPost(id);

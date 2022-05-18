@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import commentRoutes from "./routes/commentRoute";
 import postRoutes from "./routes/postRoute";
 import userRoutes from "./routes/userRoute";
 
@@ -26,6 +27,7 @@ const options = {
 
 app.use("/users", userRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 mongoose.connect(DB_URL_REMOTE, options, (err) => {
   if (!err) {

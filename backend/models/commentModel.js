@@ -11,16 +11,16 @@ const commentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
     },
-    updateAt: {
-      type: Date,
-      default: Date.now,
-    },
     replies: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Reply",
       },
     ],
+    updateAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamp: true }
 );
