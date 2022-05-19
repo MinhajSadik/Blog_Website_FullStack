@@ -1,46 +1,44 @@
 import { Button, TextField, Typography } from "@material-ui/core/";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createComment } from "../redux/features/commentSlice";
 import useStyles from "./styles";
 
-const CommentSection = () => {
+const CommentSection = ({ post }) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  const [comment, setComment] = React.useState("");
+
   const classes = useStyles();
   const { comments } = useSelector((state) => ({
     ...state.comment,
   }));
-  const [comment, setComment] = React.useState("");
-  //   const [comments, setComments] = React.useState([]);
-  const commentsRef = React.useRef();
+  console.log(comments);
   const handleComment = (e) => {
-    setComment("");
-    commentsRef.current.scrollIntoView({ behavior: "smooth" });
+    e.preventDefault();
+    const commentData = { ...comment, user: user?.result?.name };
+    dispatch(createComment(commentData));
+  };
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setComment({ ...comment, [name]: value });
   };
 
   return (
     <div>
       <div className={classes.commentsOuterContainer}>
-        <div className={classes.commentsInnerContainer}>
-          <Typography gutterBottom variant="h6">
-            Comments
-          </Typography>
-          {comments?.map((c, i) => (
-            <Typography key={i} gutterBottom variant="subtitle1">
-              <h1>Nothing</h1>
-            </Typography>
-          ))}
-        </div>
-        <div style={{ width: "70%" }}>
+        <div style={{ width: "50%" }}>
           <Typography gutterBottom variant="h6">
             Write a comment
           </Typography>
           <TextField
             fullWidth
-            rows={2}
+            minRows={1}
             variant="outlined"
-            label="Comment"
-            multiline
+            label="Declare a Comment"
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={onInputChange}
           />
           <br />
           <Button

@@ -1,16 +1,24 @@
+import CommentModel from "../models/commentModel";
 import ReplyModel from "../models/replyModel";
 
 export const createReply = async (req, res) => {
-  const reply = req.body;
+  const { reply, commentId, user } = req.body;
   try {
+    const comment = await CommentModel.findById(commentId);
     const newReply = new ReplyModel({
-      ...reply,
+      reply,
+      commentId,
+      user,
     });
-    const savedReply = await newReply.save();
-    res.status(201).json(savedReply);
-  } catch (err) {
+    const saveReply = await newReply.save();
+
+    comment.replies.push(saveReply._id);
+    await comment.save();
+    res.status(201).json(saveReply);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).json({
-      message: err.message,
+      message: error.message,
     });
   }
 };

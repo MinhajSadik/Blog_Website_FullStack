@@ -31,6 +31,8 @@ export default makeStyles((theme) => ({
   commentsOuterContainer: {
     display: "flex",
     justifyContent: "space-between",
+    height: "300px",
+    scrollBehavior: "smooth",
   },
   commentsInnerContainer: {
     height: "200px",

@@ -8,7 +8,6 @@ const replySchema = mongoose.Schema(
     },
     reply: {
       type: String,
-      required: true,
       trim: true,
     },
     user: {

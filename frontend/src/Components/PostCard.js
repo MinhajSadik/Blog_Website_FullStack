@@ -22,7 +22,7 @@ const PostCard = ({ post }) => {
     return str;
   };
 
-  return post.map((post) => (
+  return (
     <MDBCardGroup key={post._id}>
       <MDBCard className="h-100 mt-2 d-sm-flex" style={{ maxWidth: "20rem" }}>
         <MDBCardBody>
@@ -43,7 +43,7 @@ const PostCard = ({ post }) => {
         </MDBCardBody>
       </MDBCard>
     </MDBCardGroup>
-  ));
+  );
 };
 
 export default PostCard;
