@@ -20,7 +20,7 @@ const initialState = {
 const AddPost = () => {
   const [postData, setPostData] = useState(initialState);
   const [errMsg, setErrMsg] = useState(null);
-  const { error, loading } = useSelector((state) => ({
+  const { error } = useSelector((state) => ({
     ...state.post,
   }));
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -36,7 +36,6 @@ const AddPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (title && content && date) {
       const addPostData = { ...postData, name: user?.result?.name };
       dispatch(createPost({ postData: addPostData, navigate, toast }));
@@ -49,7 +48,7 @@ const AddPost = () => {
       //   })
       // );
     } else {
-      setErrMsg("Please fill all the fields");
+      errMsg ? setErrMsg("Please fill all the fields") : setErrMsg("");
     }
   };
   const onInputChange = (e) => {

@@ -31,9 +31,9 @@ const Home = () => {
         <MDBCol>
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-              {posts.map((post) =>
-                post.map((p) => <PostCard key={p._id} {...p} />)
-              )}
+              {posts.map((post, index) => (
+                <PostCard key={index} post={post} />
+              ))}
             </MDBRow>
           </MDBContainer>
         </MDBCol>

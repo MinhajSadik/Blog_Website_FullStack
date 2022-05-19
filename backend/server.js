@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import commentRoutes from "./routes/commentRoute";
 import postRoutes from "./routes/postRoute";
+import replyRoutes from "./routes/replyRoute";
 import userRoutes from "./routes/userRoute";
 
 const app = express();
@@ -28,6 +29,7 @@ const options = {
 app.use("/users", userRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+app.use("/reply", replyRoutes);
 
 mongoose.connect(DB_URL_REMOTE, options, (err) => {
   if (!err) {

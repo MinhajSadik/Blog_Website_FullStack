@@ -9,14 +9,15 @@ const replySchema = mongoose.Schema(
     reply: {
       type: String,
       required: true,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+      trim: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   { timestamp: true }
