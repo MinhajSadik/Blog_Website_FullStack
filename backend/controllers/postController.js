@@ -1,9 +1,13 @@
 import PostModel from "../models/postModel";
 
 export const addPost = async (req, res) => {
-  const post = req.body;
+  const { title, content, author } = req.body;
   try {
-    const newPost = new PostModel(post);
+    const newPost = new PostModel({
+      title,
+      content,
+      author,
+    });
     const savePost = await newPost.save();
     res.status(201).send(savePost);
   } catch (error) {
@@ -16,6 +20,7 @@ export const addPost = async (req, res) => {
 export const getPosts = async (req, res) => {
   try {
     const posts = await PostModel.find({})
+      .populate("author", "name email")
       .populate({
         path: "comments",
         populate: {
@@ -37,6 +42,7 @@ export const getPost = async (req, res) => {
   const { id } = req.params;
   try {
     const post = await PostModel.findById(id)
+      .populate("author", "name email")
       .populate({
         path: "comments",
         populate: {

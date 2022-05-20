@@ -2,20 +2,19 @@ import CommentModel from "../models/commentModel";
 import PostModel from "../models/postModel";
 
 export const addComment = async (req, res) => {
-  const { comment, postId, author } = req.body;
+  const { comment, postId, author, replies } = req.body;
   try {
     const oldPost = await PostModel.findById(postId);
     const newComment = new CommentModel({
       comment,
       postId,
       author,
+      replies,
     });
 
     const savedComment = await newComment.save();
     await oldPost.comments.push(savedComment._id);
     await oldPost.save();
-
-    console.log("oldPost", oldPost);
     res.status(201).json(savedComment);
   } catch (error) {
     console.error(error.message);
@@ -30,7 +29,7 @@ export const getComments = async (req, res) => {
   try {
     const comments = await CommentModel.find({})
       .populate("replies")
-      .populate("author")
+      .populate("author", "name email")
       .sort({ createdAt: -1 });
     res.status(200).json(comments);
   } catch (error) {

@@ -30,6 +30,7 @@ const AddPost = () => {
   const { title, content, date } = postData;
   const { id } = useParams();
 
+
   useEffect(() => {
     error && toast.error(error);
   }, [error]);
@@ -37,7 +38,7 @@ const AddPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && content && date) {
-      const addPostData = { ...postData, name: user?.result?.name };
+      const addPostData = { ...postData, author: user.result._id };
       dispatch(addPost({ postData: addPostData, navigate, toast }));
     } else {
       errMsg ? setErrMsg("Please fill all the fields") : setErrMsg("");

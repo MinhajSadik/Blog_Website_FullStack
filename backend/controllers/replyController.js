@@ -2,17 +2,17 @@ import CommentModel from "../models/commentModel";
 import ReplyModel from "../models/replyModel";
 
 export const addReply = async (req, res) => {
-  const { reply, commentId, user } = req.body;
+  const { reply, commentId, author } = req.body;
   try {
     const comment = await CommentModel.findById(commentId);
     const newReply = new ReplyModel({
       reply,
       commentId,
-      user,
+      author,
     });
     const saveReply = await newReply.save();
 
-    comment.replies.push(saveReply._id);
+    comment.replies.push(saveReply);
     await comment.save();
     res.status(201).json(saveReply);
   } catch (error) {
