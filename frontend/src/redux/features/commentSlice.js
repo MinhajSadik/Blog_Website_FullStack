@@ -50,7 +50,7 @@ const commentSlice = createSlice({
     },
     [addComment.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comments = action.payload;
+      state.comment = action.payload;
     },
     [addComment.rejected]: (state, action) => {
       state.loading = false;
@@ -61,7 +61,7 @@ const commentSlice = createSlice({
     },
     [getComments.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comments = action.payload.data;
+      state.comments = action.payload;
     },
     [getComments.rejected]: (state, action) => {
       state.loading = false;

@@ -10,7 +10,7 @@ const Home = () => {
     ...state.post,
   }));
   console.log(posts);
-
+  
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
@@ -32,7 +32,7 @@ const Home = () => {
         <MDBCol>
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-              {posts.map((post, index) => (
+              {posts?.map((post) => (
                 <PostCard key={post._id} post={post} />
               ))}
             </MDBRow>

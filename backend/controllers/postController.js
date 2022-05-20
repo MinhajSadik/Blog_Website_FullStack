@@ -15,13 +15,15 @@ export const addPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await PostModel.find({}).populate({
-      path: "comments",
-      populate: {
-        path: "replies",
-        model: "Reply",
-      },
-    });
+    const posts = await PostModel.find({})
+      .populate({
+        path: "comments",
+        populate: {
+          path: "replies",
+          model: "Reply",
+        },
+      })
+      .sort({ createdAt: -1 });
     res.status(200).send(posts);
   } catch (error) {
     console.error(error.message);
@@ -34,13 +36,15 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   const { id } = req.params;
   try {
-    const post = await PostModel.findById(id).populate({
-      path: "comments",
-      populate: {
-        path: "replies",
-        model: "Reply",
-      },
-    });
+    const post = await PostModel.findById(id)
+      .populate({
+        path: "comments",
+        populate: {
+          path: "replies",
+          model: "Reply",
+        },
+      })
+      .sort({ createdAt: -1 });
     res.status(200).send(post);
   } catch (error) {
     console.error(error.message);

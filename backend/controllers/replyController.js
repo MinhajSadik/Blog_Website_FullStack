@@ -25,8 +25,8 @@ export const addReply = async (req, res) => {
 
 export const getReplies = async (req, res) => {
   try {
-    const replies = await ReplyModel.find({})
-      .populate("comments", "comment, postId");
+    const replies = await ReplyModel.find({}).populate("author", "name email");
+    // .populate("comments", "comment, postId");
     res.status(200).json(replies);
   } catch (error) {
     console.error(error);
