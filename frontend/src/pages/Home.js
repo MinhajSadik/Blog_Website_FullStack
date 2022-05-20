@@ -9,6 +9,7 @@ const Home = () => {
   const { posts, loading } = useSelector((state) => ({
     ...state.post,
   }));
+  console.log(posts);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -32,7 +33,7 @@ const Home = () => {
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
               {posts.map((post, index) => (
-                <PostCard key={index} post={post} />
+                <PostCard key={post._id} post={post} />
               ))}
             </MDBRow>
           </MDBContainer>

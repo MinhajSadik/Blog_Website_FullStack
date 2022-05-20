@@ -10,7 +10,7 @@ const replySchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    user: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

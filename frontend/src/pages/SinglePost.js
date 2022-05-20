@@ -12,6 +12,7 @@ const SinglePost = () => {
   const { post } = useSelector((state) => ({
     ...state.post,
   }));
+  console.log(post);
   const { user } = useSelector((state) => ({ ...state.auth }));
 
   const { id } = useParams();

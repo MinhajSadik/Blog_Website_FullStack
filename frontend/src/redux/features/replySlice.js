@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
 
-export const createReply = createAsyncThunk(
-  "reply/createReply",
+export const addReply = createAsyncThunk(
+  "reply/addReply",
   async (replyData, { rejectWithValue }) => {
     try {
-      const response = await api.createReply(replyData);
+      const response = await api.addReply(replyData);
       return response.data;
     } catch (error) {
       console.error(error.message);
@@ -27,18 +27,6 @@ export const getReplies = createAsyncThunk(
   }
 );
 
-// export const getReplie = createAsyncThunk(
-//   "reply/getReplie",
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const response = await api.getReplie(id);
-//       return response.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data);
-//     }
-//   }
-// );
-
 const replySlice = createSlice({
   name: "reply",
   initialState: {
@@ -48,16 +36,23 @@ const replySlice = createSlice({
     loading: false,
   },
 
-  reducers: {},
+  reducers: {
+    setReply: (state, action) => {
+      state.reply = action.payload;
+    },
+    setReplies: (state, action) => {
+      state.replies = action.payload;
+    },
+  },
   extraReducers: {
-    [createReply.pending]: (state, action) => {
+    [addReply.pending]: (state, action) => {
       state.loading = true;
     },
-    [createReply.fulfilled]: (state, action) => {
+    [addReply.fulfilled]: (state, action) => {
       state.loading = false;
-      state.replies = [action.payload];
+      state.replies = action.payload;
     },
-    [createReply.rejected]: (state, action) => {
+    [addReply.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },
@@ -66,7 +61,7 @@ const replySlice = createSlice({
     },
     [getReplies.fulfilled]: (state, action) => {
       state.loading = false;
-      state.replies = [action.payload];
+      state.replies = action.payload;
     },
     [getReplies.rejected]: (state, action) => {
       state.loading = false;
@@ -74,5 +69,7 @@ const replySlice = createSlice({
     },
   },
 });
+
+export const { setReply, setReplies } = replySlice.actions;
 
 export default replySlice.reducer;

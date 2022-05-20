@@ -1,13 +1,11 @@
 import PostModel from "../models/postModel";
 
-export const createPost = async (req, res) => {
+export const addPost = async (req, res) => {
   const post = req.body;
   try {
-    const newPost = new PostModel({
-      ...post,
-    });
-    const savedPost = await newPost.save();
-    res.status(201).json(savedPost);
+    const newPost = new PostModel(post);
+    const savePost = await newPost.save();
+    res.status(201).send(savePost);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -24,7 +22,7 @@ export const getPosts = async (req, res) => {
         model: "Reply",
       },
     });
-    res.status(200).json(posts);
+    res.status(200).send(posts);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createPost } from "../redux/features/postSlice";
+import { addPost } from "../redux/features/postSlice";
 
 const initialState = {
   title: "",
@@ -38,7 +38,7 @@ const AddPost = () => {
     e.preventDefault();
     if (title && content && date) {
       const addPostData = { ...postData, name: user?.result?.name };
-      dispatch(createPost({ postData: addPostData, navigate, toast }));
+      dispatch(addPost({ postData: addPostData, navigate, toast }));
 
       // dispatch(
       //   createPost({

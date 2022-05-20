@@ -24,7 +24,7 @@ const PostCard = ({ post }) => {
 
   return (
     <MDBCardGroup key={post._id}>
-      <MDBCard className="h-100 mt-2 d-sm-flex" style={{ maxWidth: "20rem" }}>
+      <MDBCard className="h-100 mt-2 d-sm-flex" style={{ maxWidth: "30rem" }}>
         <MDBCardBody>
           <MDBCardTitle className="text-start">{post.title}</MDBCardTitle>
           <MDBCardText className="text-start">

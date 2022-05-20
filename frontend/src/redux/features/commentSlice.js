@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
 
-export const createComment = createAsyncThunk(
-  "comment/createComment",
+export const addComment = createAsyncThunk(
+  "comment/addComment",
   async (commentData, { rejectWithValue }) => {
     try {
-      const response = await api.createComment(commentData);
+      const response = await api.addComment(commentData);
       return response.data;
     } catch (error) {
       console.error(error.message);
@@ -27,18 +27,6 @@ export const getComments = createAsyncThunk(
   }
 );
 
-// export const getComment = createAsyncThunk(
-//   "comment/getComment",
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const response = await api.getComment(id);
-//       return response.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data);
-//     }
-//   }
-// );
-
 const commentSlice = createSlice({
   name: "comment",
   initialState: {
@@ -48,16 +36,23 @@ const commentSlice = createSlice({
     loading: false,
   },
 
-  reducers: {},
+  reducers: {
+    setComment: (state, action) => {
+      state.comment = action.payload;
+    },
+    setComments: (state, action) => {
+      state.comments = action.payload;
+    },
+  },
   extraReducers: {
-    [createComment.pending]: (state, action) => {
+    [addComment.pending]: (state, action) => {
       state.loading = true;
     },
-    [createComment.fulfilled]: (state, action) => {
+    [addComment.fulfilled]: (state, action) => {
       state.loading = false;
       state.comments = action.payload;
     },
-    [createComment.rejected]: (state, action) => {
+    [addComment.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },
@@ -66,7 +61,7 @@ const commentSlice = createSlice({
     },
     [getComments.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comments = action.payload;
+      state.comments = action.payload.data;
     },
     [getComments.rejected]: (state, action) => {
       state.loading = false;
@@ -74,5 +69,7 @@ const commentSlice = createSlice({
     },
   },
 });
+
+export const { setComment, setComments } = commentSlice.actions;
 
 export default commentSlice.reducer;

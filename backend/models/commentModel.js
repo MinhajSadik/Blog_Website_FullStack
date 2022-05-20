@@ -6,12 +6,13 @@ const commentSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    
     postId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
     },
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
-    updateAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },

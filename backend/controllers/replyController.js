@@ -1,7 +1,7 @@
 import CommentModel from "../models/commentModel";
 import ReplyModel from "../models/replyModel";
 
-export const createReply = async (req, res) => {
+export const addReply = async (req, res) => {
   const { reply, commentId, user } = req.body;
   try {
     const comment = await CommentModel.findById(commentId);
@@ -26,7 +26,6 @@ export const createReply = async (req, res) => {
 export const getReplies = async (req, res) => {
   try {
     const replies = await ReplyModel.find({})
-      //   .populate("author", "name email")
       .populate("comments", "comment, postId");
     res.status(200).json(replies);
   } catch (error) {

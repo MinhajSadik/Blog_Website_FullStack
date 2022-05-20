@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "../api";
 
-export const createPost = createAsyncThunk(
-  "post/createPost",
+export const addPost = createAsyncThunk(
+  "post/addPost",
   async ({ postData, navigate, toast }, { rejectWithValue }) => {
     try {
-      const response = await api.createPost(postData);
+      const response = await api.addPost(postData);
       toast.success("Post Added Successfully");
       navigate("/");
       return response.data;
@@ -51,16 +51,23 @@ const postSlice = createSlice({
     loading: false,
   },
 
-  reducers: {},
+  reducers: {
+    // setPost: (state, { payload }) => {
+    //   state.post = payload;
+    // },
+    // setPosts: (state, { payload }) => {
+    //   state.posts = payload;
+    // },
+  },
   extraReducers: {
-    [createPost.pending]: (state, action) => {
+    [addPost.pending]: (state, action) => {
       state.loading = true;
     },
-    [createPost.fulfilled]: (state, action) => {
+    [addPost.fulfilled]: (state, action) => {
       state.loading = false;
       state.posts = action.payload;
     },
-    [createPost.rejected]: (state, action) => {
+    [addPost.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },
@@ -88,5 +95,7 @@ const postSlice = createSlice({
     },
   },
 });
+
+// export const { setPost, setPosts } = postSlice.actions;
 
 export default postSlice.reducer;
