@@ -4,12 +4,21 @@ import React from "react";
 const Reply = ({ reply }) => {
   return (
     <div key={reply._id}>
-      <div className="bg-gray-300 rounded-md text-gray-600 p-2 pt-1 my-2">
-        <div className="bg-purple-500 rounded-full inline-block px-2 py-1 text-white ">
-          Reply
+      <div class="card p-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="user d-flex flex-row align-items-center">
+            <span>
+              <small class="font-weight-bold text-primary">
+                {reply.author.name}
+              </small>{" "}
+              <small class="font-weight-bold">{reply.reply}</small>
+            </span>
+          </div>
+          <small>{moment(reply.createdAt).startOf().fromNow()} </small>
         </div>
-        <p className="bg-gray-200 rounded px-2 py-1">{reply.reply}</p>
-        <small>{moment(reply.createdAt).startOf().fromNow()}</small>
+        <div class="action d-flex justify-content-between mt-2 align-items-center">
+          <div class="reply px-4">{reply && <button>Reply</button>}</div>
+        </div>
       </div>
     </div>
   );

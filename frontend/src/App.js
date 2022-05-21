@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Header from "./Components/Header";
+import PrivateRoute from "./Components/PrivateRoute";
 import AddPost from "./pages/AddPost";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -25,12 +26,33 @@ function App() {
       <div className="App">
         <ToastContainer />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/addPost" element={<AddPost />} />
+          <Route
+            path="/addPost"
+            element={
+              <PrivateRoute>
+                <AddPost />
+              </PrivateRoute>
+            }
+          />
           {/* <Route path="/editPost/:id" element={<AddPost />} /> */}
-          <Route path="/post/:id" element={<SinglePost />} />
+          <Route
+            path="/post/:id"
+            element={
+              <PrivateRoute>
+                <SinglePost />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,26 +1,26 @@
 import { Button, Input } from "@material-ui/core/";
 import moment from "moment";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addReply } from "../redux/features/replySlice";
 import Reply from "./Reply";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
+  //   const [clickReply, setClickReply] = useState(true);
   const [reply, setReply] = useState("");
+  const { user } = useSelector((state) => ({ ...state.auth }));
 
   const typeReply = (e) => {
     setReply(e.target.value);
   };
-
-  console.log(comment);
 
   const replySubmit = (e) => {
     e.preventDefault();
     const replyData = {
       reply,
       commentId: comment._id,
-      author: comment.author,
+      author: user.result._id,
     };
     dispatch(addReply(replyData));
   };
@@ -30,31 +30,30 @@ const Comment = ({ comment }) => {
     marginBottom: "10px",
   };
   return (
+      
     <div key={comment._id}>
-      {/* <Paper
-        style={{
-          margin: "100px",
-          padding: "20px",
-          borderRadius: "15px",
-        }}
-        elevation={6}
-      >
-        <h4>Comment</h4>
-
-        <Typography variant="body1">
-          <strong>{comment?.author?.name}</strong>
-        </Typography>
-        <Typography variant="body1">{comment.comment}</Typography>
-        <Typography variant="body1" style={{ marginTop: "10px" }}>
-          {moment(comment.createdAt).format("DD/MM/YYYY, h:mm:ss a")}
-        </Typography>
-      </Paper> */}
-      <div className="bg-gray-300 rounded-md text-gray-600 p-2 pt-1 my-2">
-        <div className="bg-purple-500 rounded-full inline-block px-2 py-1 text-white ">
-          Comment
+      <div class="card p-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="user d-flex flex-row align-items-center">
+            <span>
+              <small class="font-weight-bold text-primary">
+                {comment.author.name}
+              </small>{" "}
+              <small class="font-weight-bold">{comment.comment}</small>
+            </span>
+          </div>
+          <small>{moment(comment.createdAt).startOf().fromNow()} </small>
         </div>
-        <p className="bg-gray-200 rounded px-2 py-1">{comment.comment}</p>
-        <small>{moment(comment.createdAt).startOf().fromNow()}</small>
+        <div class="action d-flex justify-content-between mt-2 align-items-center">
+          <div class="reply px-4">
+            <button>Reply</button>
+          </div>
+          <div class=" px-4">
+            {comment.replies.length > 0 && (
+              <button>{comment.replies.length} Replies</button>
+            )}
+          </div>
+        </div>
       </div>
       <div className="reply-input">
         <Input
