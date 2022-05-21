@@ -14,11 +14,11 @@ export const addReply = createAsyncThunk(
   }
 );
 
-export const getReplies = createAsyncThunk(
-  "reply/getReplies",
-  async (_, { rejectWithValue }) => {
+export const getReply = createAsyncThunk(
+  "reply/getReply",
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await api.getReplies();
+      const response = await api.getReply(id);
       return response.data;
     } catch (error) {
       console.error(error.message);
@@ -56,14 +56,14 @@ const replySlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
-    [getReplies.pending]: (state, action) => {
+    [getReply.pending]: (state, action) => {
       state.loading = true;
     },
-    [getReplies.fulfilled]: (state, action) => {
+    [getReply.fulfilled]: (state, action) => {
       state.loading = false;
-      state.replies = action.payload;
+      state.reply = action.payload;
     },
-    [getReplies.rejected]: (state, action) => {
+    [getReply.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

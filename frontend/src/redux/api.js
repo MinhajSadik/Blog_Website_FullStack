@@ -22,8 +22,8 @@ export const getPost = (id) => API.get(`/post/${id}`);
 
 //comments
 export const addComment = (commentData) => API.post("/comment", commentData);
-export const getComments = () => API.get("/comment");
+export const getComment = (id) => API.get(`/comment/${id}`);
 
 //replies
 export const addReply = (replyData) => API.post("/reply", replyData);
-export const getReplies = () => API.get("/reply");
+export const getReply = (id) => API.get(`/reply/${id}`);

@@ -19,7 +19,7 @@ const CommentSection = ({ post }) => {
       postId: post._id,
       author: user.result._id,
     };
-    dispatch(addComment(addCommentData));
+     dispatch(addComment(addCommentData));
   };
 
   return (

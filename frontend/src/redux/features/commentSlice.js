@@ -14,11 +14,11 @@ export const addComment = createAsyncThunk(
   }
 );
 
-export const getComments = createAsyncThunk(
-  "comment/getComments",
-  async (_, { rejectWithValue }) => {
+export const getComment = createAsyncThunk(
+  "comment/getComment",
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await api.getComments();
+      const response = await api.getComment(id);
       return response.data;
     } catch (error) {
       console.error(error.message);
@@ -38,9 +38,6 @@ const commentSlice = createSlice({
 
   reducers: {
     setComment: (state, action) => {
-      state.comment = action.payload;
-    },
-    setComments: (state, action) => {
       state.comments = action.payload;
     },
   },
@@ -56,14 +53,14 @@ const commentSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
-    [getComments.pending]: (state, action) => {
+    [getComment.pending]: (state, action) => {
       state.loading = true;
     },
-    [getComments.fulfilled]: (state, action) => {
+    [getComment.fulfilled]: (state, action) => {
       state.loading = false;
       state.comments = action.payload;
     },
-    [getComments.rejected]: (state, action) => {
+    [getComment.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

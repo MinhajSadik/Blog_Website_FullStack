@@ -16,7 +16,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(express.json({ limit: "30mb", extended: true }));
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 const DB_URL_LOCAL = `mongodb://127.0.0.1:27017/${process.env.DB_NAME}`;
 

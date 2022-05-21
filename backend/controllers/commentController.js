@@ -25,13 +25,14 @@ export const addComment = async (req, res) => {
   }
 };
 
-export const getComments = async (req, res) => {
+export const getComment = async (req, res) => {
+  const { id } = req.params;
   try {
-    const comments = await CommentModel.find({})
+    const comment = await CommentModel.find({ postId: id })
       .populate("replies")
       .populate("author", "name email")
       .sort({ createdAt: -1 });
-    res.status(200).json(comments);
+    res.status(200).json(comment);
   } catch (error) {
     console.error(error);
     res.status(500).json({

@@ -23,11 +23,14 @@ export const addReply = async (req, res) => {
   }
 };
 
-export const getReplies = async (req, res) => {
+export const getReply = async (req, res) => {
+  const { id } = req.params;
   try {
-    const replies = await ReplyModel.find({}).populate("author", "name email");
+    const reply = await ReplyModel.findById(id)
+      .populate("author", "name email")
+      .sort({ createdAt: -1 });
     // .populate("comments", "comment, postId");
-    res.status(200).json(replies);
+    res.status(200).json(reply);
   } catch (error) {
     console.error(error);
     res.status(500).json({

@@ -1,44 +1,24 @@
 /* eslint-disable no-undef */
-import { Button, Divider, Input, Paper, Typography } from "@material-ui/core/";
+import { Divider, Paper, Typography } from "@material-ui/core/";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
-import Accordion from "react-bootstrap/Accordion";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getComments } from "../redux/features/commentSlice";
+import Comment from "../Components/Comment";
+import { getComment } from "../redux/features/commentSlice";
 import { getPost } from "../redux/features/postSlice";
-import { addReply, getReplies } from "../redux/features/replySlice";
 import CommentSection from "./CommentSection";
 
 const SinglePost = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [reply, setReply] = useState("");
-  const { post, comments, replies } = useSelector((state) => ({
+  const { post, comments } = useSelector((state) => ({
     ...state.post,
     ...state.comment,
     ...state.reply,
   }));
+
   const { user } = useSelector((state) => ({ ...state.auth }));
-
-  const postComment = comments.filter((comment) => comment.postId === id);
-  const postReplies = replies.filter((reply) => reply.commentId === id);
-
-  console.log("postReplies", postReplies, "postComment", postComment);
-
-  const typeReply = (e) => {
-    setReply(e.target.value);
-  };
-
-  const replySubmit = (e) => {
-    e.preventDefault();
-    const replyData = {
-      reply,
-      commentId: postComment[0]._id,
-      author: user.result._id,
-    };
-    dispatch(addReply(replyData));
-  };
 
   useEffect(() => {
     if (id) {
@@ -47,17 +27,10 @@ const SinglePost = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(getComments());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getReplies());
-  }, [dispatch]);
-
-  const replyActionsStyle = {
-    marginTop: "10px",
-    marginBottom: "10px",
-  };
+    if (post._id) {
+      dispatch(getComment(post._id));
+    }
+  }, [dispatch, post._id]);
 
   return (
     <Paper
@@ -106,69 +79,8 @@ const SinglePost = () => {
           <CommentSection post={post} />
           <Divider style={{ margin: "20px 0" }} />
           <div>
-            {postComment?.map((comment) => (
-              <div key={comment._id}>
-                <Paper
-                  style={{
-                    margin: "100px",
-                    padding: "20px",
-                    borderRadius: "15px",
-                  }}
-                  elevation={6}
-                >
-                  <Typography variant="body1">
-                    <strong>{comment?.author?.name}</strong>
-                  </Typography>
-                  <Typography variant="body1">{comment.comment}</Typography>
-                  <Typography variant="body1" style={{ marginTop: "10px" }}>
-                    {moment(comment.createdAt).format("DD/MM/YYYY, h:mm:ss a")}
-                  </Typography>
-                </Paper>
-
-                <Accordion defaultActiveKey="1">
-                  <Accordion.Item eventKey="0">
-                    <Accordion.Header>Reply</Accordion.Header>
-                    <Accordion.Body>
-                      <div className="reply-input">
-                        <Input
-                          value={reply}
-                          rows="2"
-                          id={comment._id}
-                          rowsMax="2"
-                          placeholder={"Type your reply..."}
-                          style={{ width: "100%" }}
-                          onChange={typeReply}
-                        />
-                        <div className="comment-action">
-                          <Button
-                            size="small"
-                            color="primary"
-                            variant="contained"
-                            style={replyActionsStyle}
-                            onClick={replySubmit}
-                          >
-                            Reply
-                          </Button>
-                        </div>
-                      </div>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  {replies?.map((reply) => (
-                    <div key={reply._id}>
-                      <Typography variant="body1">
-                        {console.log("reply", reply)}
-                        <strong>{reply.author?.name}</strong>
-                      </Typography>
-                      <Typography variant="body1">{reply.reply}</Typography>
-                      <Typography variant="body1" style={{ marginTop: "10px" }}>
-                        {moment(reply.createdAt).format(
-                          "DD/MM/YYYY, h:mm:ss a"
-                        )}
-                      </Typography>
-                    </div>
-                  ))}
-                </Accordion>
-              </div>
+            {comments?.map((comment) => (
+              <Comment comment={comment} key={comment._id} />
             ))}
           </div>
         </div>
