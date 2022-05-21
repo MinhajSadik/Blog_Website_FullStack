@@ -1,5 +1,5 @@
 import express from "express";
-import { addReply, getReply } from "../controllers/replyController";
+import { addReply, getReply } from "../controllers/replyController.js";
 const router = express.Router();
 
 router.post("/", addReply);

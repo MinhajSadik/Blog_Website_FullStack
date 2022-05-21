@@ -1,6 +1,14 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const devEnv = process.env.NODE_ENV !== "production";
+
+const { REACT_APP_DEV_API, REACT_APP_PROD_API } = process.env;
+
+const API = axios.create({
+  baseURL: `${devEnv ? REACT_APP_DEV_API : REACT_APP_PROD_API}`,
+});
+
+// const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {

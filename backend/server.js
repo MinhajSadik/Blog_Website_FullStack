@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
-import commentRoutes from "./routes/commentRoute";
-import postRoutes from "./routes/postRoute";
-import replyRoutes from "./routes/replyRoute";
-import userRoutes from "./routes/userRoute";
+import commentRoutes from "./routes/commentRoute.js";
+import postRoutes from "./routes/postRoute.js";
+import replyRoutes from "./routes/replyRoute.js";
+import userRoutes from "./routes/userRoute.js";
 
 const app = express();
 dotenv.config();

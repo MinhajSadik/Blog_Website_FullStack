@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "blog website for job assignment",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon -r esm server.js",
-    "start": "node server"
+    "start": "node server.js"
   },
   "repository": "https://github.com/MinhajSadik/Blog_Website_FullStack",
   "author": "MinhajSadik",

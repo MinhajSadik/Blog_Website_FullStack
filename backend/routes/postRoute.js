@@ -1,6 +1,6 @@
 import express from "express";
-import { addPost, getPost, getPosts } from "../controllers/postController";
-import checkAuth from "../middlewares/authMiddleware";
+import { addPost, getPost, getPosts } from "../controllers/postController.js";
+import checkAuth from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.post("/", checkAuth, addPost);

@@ -1,4 +1,4 @@
-import PostModel from "../models/postModel";
+import PostModel from "../models/postModel.js";
 
 export const addPost = async (req, res) => {
   const { title, content, author } = req.body;
