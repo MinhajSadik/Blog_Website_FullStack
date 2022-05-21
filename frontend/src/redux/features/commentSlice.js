@@ -36,11 +36,7 @@ const commentSlice = createSlice({
     loading: false,
   },
 
-  reducers: {
-    setComment: (state, action) => {
-      state.comments = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [addComment.pending]: (state, action) => {
       state.loading = true;

@@ -7,9 +7,10 @@ import Reply from "./Reply";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
-  //   const [clickReply, setClickReply] = useState(true);
   const [reply, setReply] = useState("");
-  const { user } = useSelector((state) => ({ ...state.auth }));
+  const { user } = useSelector((state) => ({
+    ...state.auth,
+  }));
 
   const typeReply = (e) => {
     setReply(e.target.value);

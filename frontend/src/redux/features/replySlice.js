@@ -61,7 +61,7 @@ const replySlice = createSlice({
     },
     [getReply.fulfilled]: (state, action) => {
       state.loading = false;
-      state.reply = action.payload;
+      state.replies = action.payload;
     },
     [getReply.rejected]: (state, action) => {
       state.loading = false;

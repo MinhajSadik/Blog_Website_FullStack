@@ -18,8 +18,6 @@ const SinglePost = () => {
     ...state.reply,
   }));
 
-  const { user } = useSelector((state) => ({ ...state.auth }));
-
   useEffect(() => {
     if (id) {
       dispatch(getPost(id));
@@ -61,7 +59,7 @@ const SinglePost = () => {
               to="/profile"
               style={{ textDecoration: "none", color: "#3f51b5" }}
             >
-              {user?.result?.name}
+              {post?.author?.name}
             </Link>
           </Typography>
           <Typography

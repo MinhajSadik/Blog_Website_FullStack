@@ -7,20 +7,17 @@ import {
 } from "mdb-react-ui-kit";
 import moment from "moment";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  const { user } = useSelector((state) => ({ ...state.auth }));
-  // const userId = user?.result?._id || user?.result?.id;
-
-  // const dispatch = useDispatch();
   const excerpt = (str) => {
     if (str.length > 45) {
       str = str.substring(0, 45) + "...";
     }
     return str;
   };
+
+  console.log(post.author);
 
   return (
     <MDBCardGroup key={post._id}>
@@ -30,7 +27,7 @@ const PostCard = ({ post }) => {
           <MDBCardText className="text-start">
             Date: {moment(post.date).format("DD/MM/YYYY")}
             <br />
-            creator: {user?.result?.name}
+            creator: {post.author.name}
           </MDBCardText>
 
           <MDBCardText className="text-start">

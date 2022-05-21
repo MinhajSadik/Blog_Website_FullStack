@@ -9,7 +9,7 @@ const Reply = ({ reply }) => {
           <div className="user d-flex flex-row align-items-center">
             <span>
               <small className="font-weight-bold text-primary">
-                {reply.author.name}
+                {reply?.author?.name}
               </small>{" "}
               <small className="font-weight-bold">{reply.reply}</small>
             </span>
