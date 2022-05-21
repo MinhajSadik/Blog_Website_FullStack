@@ -30,7 +30,7 @@ const SinglePost = () => {
     if (post._id) {
       dispatch(getComment(post._id));
     }
-  }, [dispatch, post._id]);
+  }, [dispatch, post._id, comments]);
 
   return (
     <Paper
