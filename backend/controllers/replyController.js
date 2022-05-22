@@ -27,6 +27,7 @@ export const getReply = async (req, res) => {
   const { id } = req.params;
   try {
     const reply = await ReplyModel.find({ commentId: id })
+      .populate("author", "name")
       .populate("author", "name email")
       .sort({ createdAt: -1 });
     res.status(200).json(reply);

@@ -8,6 +8,8 @@ import Reply from "./Reply";
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
+  const [clickReply, setClickReply] = useState(false);
+
   const { user } = useSelector((state) => ({
     ...state.auth,
   }));
@@ -16,14 +18,15 @@ const Comment = ({ comment }) => {
     setReply(e.target.value);
   };
 
-  const replySubmit = (e) => {
+  const submitReply = (e) => {
     e.preventDefault();
-    const replyData = {
+    const addReplyData = {
       reply,
       commentId: comment._id,
       author: user.result._id,
     };
-    dispatch(addReply(replyData));
+    dispatch(addReply(addReplyData));
+    setReply("");
   };
 
   const replyActionsStyle = {
@@ -45,41 +48,45 @@ const Comment = ({ comment }) => {
           <small>{moment(comment.createdAt).startOf().fromNow()} </small>
         </div>
         <div className="action d-flex justify-content-between mt-2 align-items-center">
-          <div className="reply px-4">
-            <button>Reply</button>
+          <div className="reply px-4 ">
+            <button onClick={() => setClickReply(!clickReply)}>
+              {!clickReply ? "Reply" : "Hide"}
+            </button>
           </div>
-          <div className=" px-4">
+          <div className="font-weight-bold text-primary px-4">
             {comment.replies.length > 0 && (
               <button>{comment.replies.length} Replies</button>
             )}
           </div>
         </div>
       </div>
-      <div className="reply-input">
-        <Input
-          value={reply}
-          rows="2"
-          id={comment._id}
-          rowsMax="2"
-          placeholder={"Type your reply..."}
-          style={{ width: "100%" }}
-          onChange={typeReply}
-        />
-        <div className="comment-action">
-          <Button
-            size="small"
-            color="primary"
-            variant="contained"
-            style={replyActionsStyle}
-            onClick={replySubmit}
-          >
-            Reply
-          </Button>
+      {clickReply && (
+        <div className="reply-input">
+          <Input
+            value={reply}
+            rows="2"
+            id={comment._id}
+            rowsMax="2"
+            placeholder={"Type your reply..."}
+            style={{ width: "100%" }}
+            onChange={typeReply}
+          />
+          <div className="comment-action">
+            <Button
+              size="small"
+              color="primary"
+              variant="contained"
+              style={replyActionsStyle}
+              onClick={submitReply}
+            >
+              Reply
+            </Button>
+          </div>
+          {comment?.replies?.map((reply) => (
+            <Reply key={reply._id} reply={reply} comment={comment} />
+          ))}
         </div>
-      </div>
-      {comment?.replies?.map((reply) => (
-        <Reply key={reply._id} reply={reply} />
-      ))}
+      )}
     </div>
   );
 };

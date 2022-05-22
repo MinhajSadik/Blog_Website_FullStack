@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
 
-const Reply = ({ reply }) => {
+const Reply = ({ reply, comment }) => {
   return (
     <div key={reply._id}>
       <div className="card p-3">
@@ -9,15 +9,15 @@ const Reply = ({ reply }) => {
           <div className="user d-flex flex-row align-items-center">
             <span>
               <small className="font-weight-bold text-primary">
-                {reply?.author?.name}
+                {comment?.author?.name}
               </small>{" "}
-              <small className="font-weight-bold">{reply.reply}</small>
+              <p className="font-weight-bold">{reply.reply}</p>
             </span>
           </div>
           <small>{moment(reply.createdAt).startOf().fromNow()} </small>
         </div>
         <div className="action d-flex justify-content-between mt-2 align-items-center">
-          <div className="reply px-4">{reply && <button>Reply</button>}</div>
+          {/* <div className="reply px-4"></div> */}
         </div>
       </div>
     </div>

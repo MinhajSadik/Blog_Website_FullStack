@@ -19,7 +19,8 @@ const CommentSection = ({ post }) => {
       postId: post._id,
       author: user.result._id,
     };
-     dispatch(addComment(addCommentData));
+    dispatch(addComment(addCommentData));
+    setComment("");
   };
 
   return (
@@ -40,7 +41,7 @@ const CommentSection = ({ post }) => {
           style={{ backgroundColor: "#2196f3", marginTop: "10px" }}
           onClick={submitComment}
         >
-          Send
+          Comment
         </Button>
       </div>
     </div>
