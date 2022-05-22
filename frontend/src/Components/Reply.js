@@ -8,9 +8,9 @@ const Reply = ({ reply, comment }) => {
         <div className="d-flex justify-content-between align-items-center">
           <div className="user d-flex flex-row align-items-center">
             <span>
-              <small className="font-weight-bold text-primary">
+              <small className="font-weight-bold text-primary d-flex">
                 {comment?.author?.name}
-              </small>{" "}
+              </small>
               <p className="font-weight-bold">{reply.reply}</p>
             </span>
           </div>

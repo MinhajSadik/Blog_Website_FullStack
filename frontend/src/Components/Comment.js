@@ -39,9 +39,9 @@ const Comment = ({ comment }) => {
         <div className="d-flex justify-content-between align-items-center">
           <div className="user d-flex flex-row align-items-center">
             <span>
-              <small className="font-weight-bold text-primary">
+              <span className="font-weight-bold text-primary d-flex">
                 {comment.author.name}
-              </small>
+              </span>
               <p className="font-weight-bold">{comment.comment}</p>
             </span>
           </div>
@@ -53,7 +53,7 @@ const Comment = ({ comment }) => {
               {!clickReply ? "Reply" : "Hide"}
             </button>
           </div>
-          <div className="font-weight-bold text-primary px-4">
+          <div className="font-weight-bold text-primary">
             {comment.replies.length > 0 && (
               <button>{comment.replies.length} Replies</button>
             )}
