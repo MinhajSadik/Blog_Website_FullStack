@@ -41,8 +41,8 @@ const Comment = ({ comment }) => {
             <span>
               <small className="font-weight-bold text-primary">
                 {comment.author.name}
-              </small>{" "}
-              <small className="font-weight-bold">{comment.comment}</small>
+              </small>
+              <p className="font-weight-bold">{comment.comment}</p>
             </span>
           </div>
           <small>{moment(comment.createdAt).startOf().fromNow()} </small>
