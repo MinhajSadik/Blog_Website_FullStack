@@ -15,7 +15,6 @@ const SinglePost = () => {
   const { post, comments } = useSelector((state) => ({
     ...state.post,
     ...state.comment,
-    ...state.reply,
   }));
 
   useEffect(() => {
@@ -68,6 +67,13 @@ const SinglePost = () => {
             style={{ marginTop: "10px" }}
           >
             {moment(post.createdAt).format("DD/MM/YYYY, h:mm:ss a")}
+          </Typography>
+          <Typography
+            variant="body1"
+            className="text-start"
+            style={{ marginTop: "10px" }}
+          >
+            post has {comments.length} comments
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <Typography variant="body1">
