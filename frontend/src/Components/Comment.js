@@ -20,6 +20,7 @@ const Comment = ({ comment }) => {
 
   const submitReply = (e) => {
     e.preventDefault();
+    if (!reply) return;
     const addReplyData = {
       reply,
       commentId: comment._id,
@@ -35,7 +36,10 @@ const Comment = ({ comment }) => {
   };
   return (
     <div key={comment._id}>
-      <div className="card p-3">
+      <div
+        style={{ background: "#3a3b3c", color: "white" }}
+        className="card p-3"
+      >
         <div className="d-flex justify-content-between align-items-center">
           <div className="user d-flex flex-row align-items-center">
             <span>
@@ -63,12 +67,15 @@ const Comment = ({ comment }) => {
       {clickReply && (
         <div className="reply-input">
           <Input
+            style={{
+              width: "95%",
+              marginLeft: "5%",
+            }}
             value={reply}
             rows="2"
             id={comment._id}
             rowsMax="2"
-            placeholder={"Type your reply..."}
-            style={{ width: "100%" }}
+            placeholder={"Write a reply..."}
             onChange={typeReply}
           />
           <div className="comment-action">
@@ -83,7 +90,7 @@ const Comment = ({ comment }) => {
             </Button>
           </div>
           {comment?.replies?.map((reply) => (
-            <Reply key={reply._id} reply={reply} comment={comment} />
+            <Reply key={reply._id} reply={reply} />
           ))}
         </div>
       )}

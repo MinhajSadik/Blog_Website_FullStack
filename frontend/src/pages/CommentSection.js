@@ -13,6 +13,7 @@ const CommentSection = ({ post }) => {
   };
 
   const submitComment = (e) => {
+    if (!comment) return;
     e.preventDefault();
     const addCommentData = {
       comment,
@@ -24,14 +25,16 @@ const CommentSection = ({ post }) => {
   };
 
   return (
-    <div style={{ marginLeft: "" }}>
+    <div>
       <div>
         <Input
+          style={{
+            width: "100%",
+          }}
           value={comment}
           rows="2"
           rowsMax="2"
-          placeholder="Type your comment..."
-          style={{ width: "100%" }}
+          placeholder="Write your comment..."
           onChange={typeComment}
         />
         <Button

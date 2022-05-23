@@ -1,15 +1,23 @@
 import moment from "moment";
 import React from "react";
 
-const Reply = ({ reply, comment }) => {
+const Reply = ({ reply }) => {
   return (
     <div key={reply._id}>
-      <div className="card p-3">
+      <div
+        style={{
+          width: "95%",
+          marginLeft: "5%",
+          background: "#3a3b3c",
+          color: "white",
+        }}
+        className="card p-2"
+      >
         <div className="d-flex justify-content-between align-items-center">
           <div className="user d-flex flex-row align-items-center">
             <span>
               <small className="font-weight-bold text-primary d-flex">
-                {comment?.author?.name}
+                {reply?.author?.name}
               </small>
               <p className="font-weight-bold">{reply.reply}</p>
             </span>

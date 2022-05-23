@@ -73,7 +73,7 @@ const SinglePost = () => {
             className="text-start"
             style={{ marginTop: "10px" }}
           >
-            post has {comments.length} comments
+            {comments.length > 0 && `post has ${comments.length} comments`}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <Typography variant="body1">
