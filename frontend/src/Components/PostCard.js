@@ -32,7 +32,10 @@ const PostCard = ({ post }) => {
 
           <MDBCardText className="text-start">
             {excerpt(post.content)}
-            <Link style={{ margin: "5px" }} to={`/post/${post._id}`}>
+            <Link
+              style={{ margin: "5px", color: "blue" }}
+              to={`/post/${post._id}`}
+            >
               {" "}
               More
             </Link>
