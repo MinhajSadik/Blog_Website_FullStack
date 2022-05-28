@@ -30,7 +30,6 @@ const AddPost = () => {
   const { title, content, date } = postData;
   const { id } = useParams();
 
-
   useEffect(() => {
     error && toast.error(error);
   }, [error]);
@@ -77,7 +76,7 @@ const AddPost = () => {
                 className="form-control"
                 required
                 invalid
-                validation="Please provide title"
+                validation="Please provide your title"
               />
             </div>
             <div className="col-md-12">
@@ -92,7 +91,7 @@ const AddPost = () => {
                 invalid
                 textarea
                 rows={4}
-                validation="Please provide content"
+                validation="Please provide your content"
               />
             </div>
             <div className="col-md-12">
@@ -105,7 +104,7 @@ const AddPost = () => {
                 className="form-control"
                 required
                 invalid
-                validation="Please provide Date"
+                validation="Please provide a Date"
               />
             </div>
 

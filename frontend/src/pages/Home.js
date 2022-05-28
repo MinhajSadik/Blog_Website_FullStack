@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PostCard from "../Components/PostCard";
+import Post from "../Components/Posts/Post";
 import { getPosts } from "../redux/features/postSlice";
 
 const Home = () => {
@@ -22,8 +22,8 @@ const Home = () => {
     <div
       style={{
         margin: "auto",
-        padding: "15px",
-        maxWidth: "1000px",
+        padding: "10px",
+        maxWidth: "100%",
         alignContent: "center",
       }}
     >
@@ -32,7 +32,7 @@ const Home = () => {
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
               {posts?.map((post) => (
-                <PostCard key={post._id} post={post} />
+                <Post key={post._id} post={post} />
               ))}
             </MDBRow>
           </MDBContainer>
