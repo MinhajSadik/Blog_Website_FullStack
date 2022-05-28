@@ -38,8 +38,8 @@ const Post = ({ post }) => {
       <Typography
         className={classes.title}
         gutterBottom
-        variant="h5"
-        component="h2"
+        variant="p"
+        component="p"
       >
         {post.title}
       </Typography>
@@ -47,11 +47,10 @@ const Post = ({ post }) => {
         variant="body2"
         color="textSecondary"
         component="p"
-        className={classes.title}
+        className={classes}
       >
         {excerpt(post.content)}
         <Link style={{ color: "blue" }} to={`/post/${post._id}`}>
-          {" "}
           More
         </Link>
       </Typography>
