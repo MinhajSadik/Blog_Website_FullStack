@@ -1,10 +1,3 @@
-// import {
-//   MDBCard,
-//   MDBCardBody,
-//   MDBCardGroup,
-//   MDBCardText,
-//   MDBCardTitle,
-// } from "mdb-react-ui-kit";
 import { Card, CardMedia, Typography } from "@material-ui/core";
 import moment from "moment";
 import React from "react";
@@ -13,8 +6,8 @@ import useStyles from "./styles";
 
 const Post = ({ post }) => {
   const excerpt = (str) => {
-    if (str.length > 45) {
-      str = str.substring(0, 45) + "...";
+    if (str.length > 30) {
+      str = str.substring(0, 30) + "...";
     }
     return str;
   };
@@ -24,29 +17,6 @@ const Post = ({ post }) => {
   const classes = useStyles();
 
   return (
-    // <MDBCardGroup key={post._id}>
-    //   <MDBCard className="h-100 mt-2 d-sm-flex" style={{ maxWidth: "30rem" }}>
-    //     <MDBCardBody>
-    //       <MDBCardTitle className="text-start">{post.title}</MDBCardTitle>
-    //       <MDBCardText className="text-start">
-    //         Date: {moment(post.date).format("DD/MM/YYYY")}
-    //         <br />
-    //         creator: {post.author.name}
-    //       </MDBCardText>
-
-    //       <MDBCardText className="text-start">
-    //         {excerpt(post.content)}
-    //         <Link
-    //           style={{ margin: "5px", color: "blue" }}
-    //           to={`/post/${post._id}`}
-    //         >
-    //           {" "}
-    //           More
-    //         </Link>
-    //       </MDBCardText>
-    //     </MDBCardBody>
-    //   </MDBCard>
-    // </MDBCardGroup>
     <Card className={classes.card} style={{ maxWidth: "30rem" }}>
       <CardMedia
         className={classes.media}

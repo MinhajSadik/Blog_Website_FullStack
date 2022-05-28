@@ -49,7 +49,7 @@ const Comment = ({ comment }) => {
               <p className="font-weight-bold">{comment.comment}</p>
             </span>
           </div>
-          <small>{moment(comment.createdAt).startOf().fromNow()} </small>
+          <small>{moment(comment.createdAt).startOf().fromNow()}</small>
         </div>
         <div className="action d-flex justify-content-between mt-2 align-items-center">
           <div className="reply px-4 ">
