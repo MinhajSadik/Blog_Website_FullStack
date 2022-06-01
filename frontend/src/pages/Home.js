@@ -6,8 +6,9 @@ import { getPosts } from "../redux/features/postSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => ({
+  const { posts, loading, isAuth } = useSelector((state) => ({
     ...state.post,
+    ...state.auth,
   }));
 
   useEffect(() => {
@@ -30,13 +31,17 @@ const Home = () => {
     >
       <MDBRow className="mt-5">
         <MDBCol>
-          {/* <MDBContainer> */}
-          <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-            {posts?.map((post) => (
-              <Post key={post._id} post={post} />
-            ))}
-          </MDBRow>
-          {/* </MDBContainer> */}
+          {isAuth ? (
+            <MDBRow className="row-cols-1 row-cols-md-3 g-2">
+              {posts?.map((post) => (
+                <Post key={post._id} post={post} />
+              ))}
+            </MDBRow>
+          ) : (
+            <div>
+              <h1>Please Login to see the posts, I saw you're not LoggedIn</h1>
+            </div>
+          )}
         </MDBCol>
       </MDBRow>
     </div>

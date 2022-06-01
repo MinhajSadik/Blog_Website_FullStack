@@ -12,8 +12,6 @@ const Post = ({ post }) => {
     return str;
   };
 
-  console.log(post.author);
-
   const classes = useStyles();
 
   return (
@@ -38,15 +36,15 @@ const Post = ({ post }) => {
       <Typography
         className={classes.title}
         gutterBottom
-        variant="p"
-        component="p"
+        variant="body1"
+        component="body1"
       >
         {post.title}
       </Typography>
       <Typography
-        variant="body2"
+        variant="body1"
         color="textSecondary"
-        component="p"
+        component="body1"
         className={classes}
       >
         {excerpt(post.content)}
@@ -57,8 +55,8 @@ const Post = ({ post }) => {
       <Typography
         className={classes.title}
         gutterBottom
-        variant="caption"
-        component="p"
+        variant="body1"
+        component="body1"
       >
         Date: {moment(post.date || post.createdAt).format("DD/MM/YYYY")}
       </Typography>
