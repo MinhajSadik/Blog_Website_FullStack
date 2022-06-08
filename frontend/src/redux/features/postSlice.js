@@ -41,6 +41,18 @@ export const getPost = createAsyncThunk(
   }
 );
 
+export const searchPost = createAsyncThunk(
+  "post/searchPost",
+  async (searchQuery, { rejectWithValue }) => {
+    try {
+      const response = await api.getPostBySearch(searchQuery);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState: {
@@ -90,6 +102,17 @@ const postSlice = createSlice({
       state.post = action.payload;
     },
     [getPost.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [searchPost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [searchPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.posts = action.payload;
+    },
+    [searchPost.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

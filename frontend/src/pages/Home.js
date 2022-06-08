@@ -10,6 +10,7 @@ const Home = () => {
     ...state.post,
     ...state.auth,
   }));
+  // const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPosts());

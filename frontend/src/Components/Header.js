@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../redux/features/authSlice";
+import { searchPost } from "../redux/features/postSlice";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -26,13 +27,15 @@ const Header = () => {
   if (token) {
     const decodedToken = decode(token);
     if (decodedToken.exp * 1000 < new Date().getTime()) {
-      // dispatch(setLogout());
+      dispatch(setLogout());
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (search) {
+    if (search.trim()) {
+      dispatch(searchPost(search));
+      navigate(`/posts/search?searchQuery=${search}`);
       setSearch("");
     } else {
       navigate("/");
