@@ -27,8 +27,8 @@ export const signUp = (formData) => API.post("/users/signup", formData);
 export const addPost = (postData) => API.post("/post", postData);
 export const getPosts = () => API.get("/post");
 export const getPost = (id) => API.get(`/post/${id}`);
-export const getPostBySearch = (searchQuery) =>
-  API.get(`/post/search?searchQuery=${searchQuery}`);
+export const getPostBySearch = (searchValue) =>
+  API.get(`/post/search/${searchValue}`);
 
 //comments
 export const addComment = (commentData) => API.post("/comment", commentData);

@@ -43,9 +43,9 @@ export const getPost = createAsyncThunk(
 
 export const searchPost = createAsyncThunk(
   "post/searchPost",
-  async (searchQuery, { rejectWithValue }) => {
+  async (searchValue, { rejectWithValue }) => {
     try {
-      const response = await api.getPostBySearch(searchQuery);
+      const response = await api.getPostBySearch(searchValue);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);

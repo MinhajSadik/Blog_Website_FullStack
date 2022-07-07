@@ -10,7 +10,7 @@ import {
   MDBNavbarNav,
   MDBNavbarToggler,
 } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../redux/features/authSlice";
@@ -33,9 +33,9 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (search.trim()) {
+    if (search) {
       dispatch(searchPost(search));
-      navigate(`/posts/search?searchQuery=${search}`);
+      navigate(`/post/search/${search}`);
       setSearch("");
     } else {
       navigate("/");
