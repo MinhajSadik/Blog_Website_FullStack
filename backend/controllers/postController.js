@@ -106,10 +106,7 @@ export const getPostBySearch = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      message: `post ${searches.length} found under the search ${searchName}`,
-      searches,
-    });
+    return res.status(200).send(searches);
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({
