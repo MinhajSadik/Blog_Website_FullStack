@@ -46,11 +46,12 @@ export const searchPost = createAsyncThunk(
   async ({ searchValue, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.getPostBySearch(searchValue);
-      if (response.data.length === 0) {
+      if (!response.data.length) {
         toast.error(`no post found with: '${searchValue}'`);
-        navigate(`/post/search/${searchValue}`);
+        navigate("/");
       }
-      if (response.data.length > 0) {
+      if (response.data.length) {
+        navigate(`/post/search/${searchValue}`);
         toast.success(
           `found ${response.data.length} post with '${searchValue}'`
         );
