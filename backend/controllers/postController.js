@@ -90,6 +90,7 @@ export const getPostBySearch = async (req, res) => {
   try {
     const searches = await PostModel.find({
       title: { $regex: searchName, $options: "i" },
+      content: { $regex: searchName, $options: "i" },
     })
       .populate("author", "name email")
       .populate({

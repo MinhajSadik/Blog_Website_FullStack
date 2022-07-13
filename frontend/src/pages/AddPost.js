@@ -49,7 +49,7 @@ const AddPost = () => {
   };
 
   const handleClear = () => {
-    setPostData({ title: "", content: "", date: [] });
+    setPostData(initialState);
   };
   return (
     <div
