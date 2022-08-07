@@ -1,4 +1,4 @@
-import { Button, Input } from "@material-ui/core/";
+import { Button } from "@material-ui/core/";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../redux/features/commentSlice";
@@ -26,10 +26,14 @@ const CommentSection = ({ post }) => {
 
   return (
     <div>
-      <div>
-        <Input
+      <div className="">
+        <input
           style={{
             width: "100%",
+            border: "1px solid #3a3b3c",
+            borderRadius: "50px",
+            padding: "5px",
+            marginTop: "5px",
           }}
           value={comment}
           rows="2"
@@ -41,7 +45,10 @@ const CommentSection = ({ post }) => {
           size="small"
           color="primary"
           variant="contained"
-          style={{ backgroundColor: "#2196f3", marginTop: "10px" }}
+          style={{
+            backgroundColor: "#2196f3",
+            marginTop: "10px",
+          }}
           onClick={submitComment}
         >
           Comment

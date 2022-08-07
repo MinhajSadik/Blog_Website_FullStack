@@ -4,7 +4,7 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getComment } from "../../redux/features/commentSlice";
+import { getComments } from "../../redux/features/commentSlice";
 import { getPost } from "../../redux/features/postSlice";
 import Comment from "./Comment";
 import CommentSection from "./CommentSection";
@@ -25,7 +25,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     if (post._id) {
-      dispatch(getComment(post._id));
+      dispatch(getComments(post._id));
     }
   }, [dispatch, post._id]);
 

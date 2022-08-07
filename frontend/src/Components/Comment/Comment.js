@@ -1,4 +1,4 @@
-import { Button, Input } from "@material-ui/core/";
+import { Button } from "@material-ui/core/";
 import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,12 +23,14 @@ const Comment = ({ comment }) => {
     if (!reply) return;
     const addReplyData = {
       reply,
-      commentId: comment._id,
-      author: user.result._id,
+      commentId: comment?._id,
+      author: user?.result?._id,
     };
     dispatch(addReply(addReplyData));
     setReply("");
   };
+
+  console.log(comment.author.name);
 
   const replyActionsStyle = {
     marginTop: "10px",
@@ -44,32 +46,36 @@ const Comment = ({ comment }) => {
           <div className="user d-flex flex-row align-items-center">
             <span>
               <span className="font-weight-bold text-primary d-flex">
-                {comment.author.name}
+                {comment?.author?.name}
               </span>
               <p className="font-weight-bold">{comment.comment}</p>
             </span>
           </div>
           <small>{moment(comment.createdAt).startOf().fromNow()}</small>
         </div>
-        <div className="action d-flex justify-content-between mt-2 align-items-center">
-          <div className="reply px-4 ">
-            <button onClick={() => setClickReply(!clickReply)}>
-              {!clickReply ? "Reply" : "Hide"}
-            </button>
-          </div>
-          <div className="font-weight-bold text-primary">
+        <div className="action d-flex justify-content-end mt-2 align-items-center">
+          <div className="font-weight-bold text-primary mr-2">
             {comment.replies.length > 0 && (
               <button>{comment.replies.length} Replies</button>
             )}
+          </div>
+          <div className="reply px-4 bg-gray-500 rounded-full">
+            <button onClick={() => setClickReply(!clickReply)}>
+              {!clickReply ? "Reply" : "Hide"}
+            </button>
           </div>
         </div>
       </div>
       {clickReply && (
         <div className="reply-input">
-          <Input
+          <input
             style={{
               width: "95%",
               marginLeft: "5%",
+              border: "1px solid #3a3b3c",
+              borderRadius: "15px",
+              padding: "5px",
+              marginTop: "5px",
             }}
             value={reply}
             rows="2"

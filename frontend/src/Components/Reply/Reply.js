@@ -2,6 +2,7 @@ import moment from "moment";
 import React from "react";
 
 const Reply = ({ reply }) => {
+  console.log(reply);
   return (
     <div key={reply._id}>
       <div

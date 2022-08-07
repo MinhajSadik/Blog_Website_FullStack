@@ -45,7 +45,7 @@ const replySlice = createSlice({
     },
   },
   extraReducers: {
-    [addReply.pending]: (state, action) => {
+    [addReply.pending]: (state) => {
       state.loading = true;
     },
     [addReply.fulfilled]: (state, action) => {
@@ -54,9 +54,9 @@ const replySlice = createSlice({
     },
     [addReply.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
-    [getReply.pending]: (state, action) => {
+    [getReply.pending]: (state) => {
       state.loading = true;
     },
     [getReply.fulfilled]: (state, action) => {
@@ -65,7 +65,7 @@ const replySlice = createSlice({
     },
     [getReply.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
   },
 });

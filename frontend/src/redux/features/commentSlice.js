@@ -14,8 +14,8 @@ export const addComment = createAsyncThunk(
   }
 );
 
-export const getComment = createAsyncThunk(
-  "comment/getComment",
+export const getComments = createAsyncThunk(
+  "comment/getComments",
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.getComment(id);
@@ -49,14 +49,14 @@ const commentSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    [getComment.pending]: (state) => {
+    [getComments.pending]: (state) => {
       state.loading = true;
     },
-    [getComment.fulfilled]: (state, action) => {
+    [getComments.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comments = [...action.payload];
+      state.comments = action.payload;
     },
-    [getComment.rejected]: (state, action) => {
+    [getComments.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
