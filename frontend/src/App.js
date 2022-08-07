@@ -4,13 +4,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Header from "./Components/Header";
-import PrivateRoute from "./Components/PrivateRoute";
-import AddPost from "./pages/AddPost";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import SinglePost from "./pages/SinglePost";
+
+import SinglePost from "./Components/Comment/SinglePost";
+import PrivateRoute from "./Components/Routes/PrivateRoute";
+import Header from "./Components/Shared/Header";
+import Login from "./Components/Users/Login";
+import Register from "./Components/Users/Register";
+import AddPost from "./pages/AddPost";
 import { setUser } from "./redux/features/authSlice";
 
 function App() {

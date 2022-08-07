@@ -82,18 +82,18 @@ const postSlice = createSlice({
     // },
   },
   extraReducers: {
-    [addPost.pending]: (state, action) => {
+    [addPost.pending]: (state) => {
       state.loading = true;
     },
     [addPost.fulfilled]: (state, action) => {
       state.loading = false;
-      state.post = action.payload;
+      state.posts = [...state.posts, action.payload];
     },
     [addPost.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
-    [getPosts.pending]: (state, action) => {
+    [getPosts.pending]: (state) => {
       state.loading = true;
     },
     [getPosts.fulfilled]: (state, action) => {
@@ -102,9 +102,9 @@ const postSlice = createSlice({
     },
     [getPosts.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
-    [getPost.pending]: (state, action) => {
+    [getPost.pending]: (state) => {
       state.loading = true;
     },
     [getPost.fulfilled]: (state, action) => {
@@ -113,9 +113,9 @@ const postSlice = createSlice({
     },
     [getPost.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
-    [searchPost.pending]: (state, action) => {
+    [searchPost.pending]: (state) => {
       state.loading = true;
     },
     [searchPost.fulfilled]: (state, action) => {
@@ -124,7 +124,7 @@ const postSlice = createSlice({
     },
     [searchPost.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
   },
 });

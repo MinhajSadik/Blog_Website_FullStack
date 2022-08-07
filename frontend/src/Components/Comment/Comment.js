@@ -2,8 +2,8 @@ import { Button, Input } from "@material-ui/core/";
 import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addReply } from "../redux/features/replySlice";
-import Reply from "./Reply";
+import { addReply } from "../../redux/features/replySlice";
+import Reply from "../Reply/Reply";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();

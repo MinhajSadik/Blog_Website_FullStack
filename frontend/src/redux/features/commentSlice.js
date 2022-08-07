@@ -38,27 +38,27 @@ const commentSlice = createSlice({
 
   reducers: {},
   extraReducers: {
-    [addComment.pending]: (state, action) => {
+    [addComment.pending]: (state) => {
       state.loading = true;
     },
     [addComment.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comment = action.payload;
+      state.comments = [...state.comments, action.payload];
     },
     [addComment.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
-    [getComment.pending]: (state, action) => {
+    [getComment.pending]: (state) => {
       state.loading = true;
     },
     [getComment.fulfilled]: (state, action) => {
       state.loading = false;
-      state.comments = action.payload;
+      state.comments = [...action.payload];
     },
     [getComment.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
     },
   },
 });

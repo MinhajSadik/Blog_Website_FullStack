@@ -1,7 +1,7 @@
 import { Button, Input } from "@material-ui/core/";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../redux/features/commentSlice";
+import { addComment } from "../../redux/features/commentSlice";
 
 const CommentSection = ({ post }) => {
   const dispatch = useDispatch();

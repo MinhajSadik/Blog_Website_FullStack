@@ -4,9 +4,9 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Comment from "../Components/Comment";
-import { getComment } from "../redux/features/commentSlice";
-import { getPost } from "../redux/features/postSlice";
+import { getComment } from "../../redux/features/commentSlice";
+import { getPost } from "../../redux/features/postSlice";
+import Comment from "./Comment";
 import CommentSection from "./CommentSection";
 
 const SinglePost = () => {
@@ -27,7 +27,7 @@ const SinglePost = () => {
     if (post._id) {
       dispatch(getComment(post._id));
     }
-  }, [dispatch, post._id, comments]);
+  }, [dispatch, post._id]);
 
   return (
     <Paper

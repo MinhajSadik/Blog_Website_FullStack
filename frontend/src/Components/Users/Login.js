@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login } from "../redux/features/authSlice";
+import { login } from "../../redux/features/authSlice";
 
 const initialState = {
   email: "",

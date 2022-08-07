@@ -14,8 +14,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setLogout } from "../redux/features/authSlice";
-import { searchPost } from "../redux/features/postSlice";
+import { setLogout } from "../../redux/features/authSlice";
+import { searchPost } from "../../redux/features/postSlice";
 
 const Header = () => {
   const [show, setShow] = useState(false);
