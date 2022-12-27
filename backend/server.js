@@ -14,12 +14,14 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.json({ limit: "30mb", extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 5000;
 
 const DB_URL_LOCAL = `mongodb://127.0.0.1:27017/${process.env.DB_NAME}`;
 
 const DB_URL_REMOTE = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pu4qt.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
