@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -r esm server.js",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "repository": "https://github.com/MinhajSadik/Blog_Website_FullStack",
